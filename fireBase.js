@@ -1,11 +1,10 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from 'firebase/app';
+import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
   apiKey: "AIzaSyCZaA5_TeKNYZGgwtoFVva7_UdV8NET5NE",
   authDomain: "hackathon---bike-the-big-apple.firebaseapp.com",
@@ -16,6 +15,29 @@ const firebaseConfig = {
   measurementId: "G-5Z8N96H9DP"
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const auth = getAuth();
+auth.useDeviceLanguage();
+const googleProvider = new GoogleAuthProvider();
+export const signInWithGoogle = async () => {
+    try {
+  //the signInWithPopUp() method accepts ANY provider we create. This is all our authentication logic
+    signInWithPopup(googleProvider).then((res) => {
+    const user = res.user;
+    console.log(user)
+  })
+     } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const signOut = async () =>{
+    try {
+      await auth.signOut()
+      alert("you've signed out - congrats.")
+    } catch(err) {
+      console.log(err)
+    }
+  }
