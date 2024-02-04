@@ -2,9 +2,9 @@ const express = require('express')
 
 const routes = express.Router()
 
-// const {
-//     getSingleRoute,
-// } = require('../queries/booking.js')
+const {
+    getSingleRoute,
+} = require('../queries/booking.js')
 
 routes.get('/:id', async (req, res) => {
     const {id} = req.params;
